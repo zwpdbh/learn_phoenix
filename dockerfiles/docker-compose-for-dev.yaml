@@ -2,15 +2,20 @@
 version: '3.8'
 services:
   livebook:
-    image: ghcr.io/livebook-dev/livebook:0.14.4
-    network_mode: "host"
+    image: ghcr.io/livebook-dev/livebook
+    networks:
+      - my_network
+    ports:
+      - "8007:8007"
+      - "8008:8008"
+    # network_mode: "host"
     environment:
       LIVEBOOK_DISTRIBUTION: name
       LIVEBOOK_COOKIE: some_token
-      LIVEBOOK_NODE: livebook@localhost
+      # LIVEBOOK_NODE: livebook@localhost
       LIVEBOOK_PORT: 8007
       LIVEBOOK_IFRAME_PORT: 8008
-      RELEASE_NODE: livebook
+      # RELEASE_NODE: livebook
       LIVEBOOK_HOME: /data 
     volumes:
       - ../documents/livebook:/livebook
