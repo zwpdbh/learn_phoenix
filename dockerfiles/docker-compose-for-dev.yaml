@@ -3,8 +3,6 @@ version: '3.8'
 services:
   livebook:
     image: ghcr.io/livebook-dev/livebook
-    networks:
-      - my_network
     ports:
       - "8007:8007"
       - "8008:8008"
@@ -35,10 +33,10 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - my_network
     depends_on:
       - livebook
+    # networks:
+    #   - my_network
 
 # visit http://localhost:3001/?pgsql=db to interact postgres directly
 # Notice:  
@@ -52,13 +50,13 @@ services:
       - "3001:8080"
     depends_on:
       - learn_phoenix_postgres
-    networks:
-      - my_network
+    # networks:
+    #   - my_network
 
 volumes:
   postgres_data:
   data:
 
-networks:
-  my_network:
-    driver: bridge
+# networks:
+#   my_network:
+#     driver: bridge
