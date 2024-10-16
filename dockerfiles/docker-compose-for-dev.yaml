@@ -1,5 +1,21 @@
-# sudo docker compose -f dockerfiles/docker-compose-for-postgres-dev.yaml up
+# docker compose -f dockerfiles/docker-compose-for-dev.yaml up --build
+version: '3.8'
 services:
+  livebook:
+    image: ghcr.io/livebook-dev/livebook:0.14.4
+    network_mode: "host"
+    environment:
+      LIVEBOOK_DISTRIBUTION: name
+      LIVEBOOK_COOKIE: some_token
+      LIVEBOOK_NODE: livebook@localhost
+      LIVEBOOK_PORT: 8007
+      LIVEBOOK_IFRAME_PORT: 8008
+      RELEASE_NODE: livebook
+      LIVEBOOK_HOME: /data 
+    volumes:
+      - ../documents/livebook:/livebook
+      - ./data:/data
+
 # !!!DB setting should match the parameters defined in config/dev.exs:
 # database: "learn_phoenix_dev"
   learn_phoenix_postgres:
@@ -14,7 +30,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-# visit http://localhost:8080/?pgsql=db to interact postgres directly
+    networks:
+      - my_network
+    depends_on:
+      - livebook
+
+# visit http://localhost:3001/?pgsql=db to interact postgres directly
 # Notice:  
 # !!!Select system as PostgreSQL!
 # the server name should be `learn_phoenix_postgres` which matches the DB service name.
@@ -23,9 +44,16 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "3001:8080"
     depends_on:
       - learn_phoenix_postgres
+    networks:
+      - my_network
 
 volumes:
   postgres_data:
+  data:
+
+networks:
+  my_network:
+    driver: bridge

@@ -18,7 +18,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 After create this application by `mix phx.new learn_phoenix`. The next thing to do is to setup database.
 
 - Check your database configuration in `config/dev.exs`.
-- Edit the `docker-compose-for-postgres-dev.yaml` to match the settings defined from `config/dev.exs` and run docker-compose to start DB.
+- Edit the `docker-compose-for-dev.yaml` to match the settings defined from `config/dev.exs` and run docker-compose to start DB.
 - Then  and run:
 
 ```sh 
@@ -67,12 +67,30 @@ sudo docker run \
 -e RELEASE_NODE=livebook_hello \
 -u $(id -u):$(id -g) \
 -v $(pwd):/data \
-ghcr.io/livebook-dev/livebook:0.12.1
+ghcr.io/livebook-dev/livebook:0.14.4
 ```
+
+```sh
+docker run \
+-p 8007:8007 \
+-p 8008:8008 \
+-P \
+-e LIVEBOOK_DISTRIBUTION=name \
+-e LIVEBOOK_COOKIE=some_token \
+-e LIVEBOOK_NODE=livebook@127.0.0.1 \
+-e LIVEBOOK_PORT=8007 \
+-e LIVEBOOK_IFRAME_PORT=8008 \
+-u $(id -u):$(id -g) \
+-v $(pwd):/data \
+ghcr.io/livebook-dev/livebook
+
+```
+shows: 
+
 
 * `--network` specify the docker container we run use [Host network driver](https://docs.docker.com/network/drivers/host/).
 * Those LIVEBOOK options are from [Livebook README](https://github.com/livebook-dev/livebook/releases).
-* Tag `0.12.1` from Livebook image support OTP26.
+* We could specify to run certain version with gag `0.12.1` for Livebook image support OTP26: `ghcr.io/livebook-dev/livebook:0.12.1`.
 * If succeed, it should oupt something like:
 
   ```sh
@@ -153,6 +171,38 @@ You shall see information like:
 ```
 
 ## Troubleshooting
+
+### [error] `inotify-tools` is needed to run `file_system` for your system
+
+Solution: `sudo apt install inotify-tools`
+
+### Cannot get connection id for node :":myapp@localhost"
+
+* If connect `xxx@localhost` doesn't work, try `xxx@127.0.0.1` instead when start project with `--name`.
+
+### Protocol 'inet_tcp': the name livebook_server@zwpdbh seems to be in use by another Erlang node
+
+* Possible reason01:
+  * `sudo docker ps` and shutdown previous running liview instance: `docker rm {container_id} -f`
+* Possible reason02:
+  * see [--name xxxxx appears to be ignored when provided with livebook start](https://github.com/livebook-dev/livebook/discussions/1356)
+  * Reason: [Docker is using release scripts, which is separate from the Livebook CLI.](https://hexdocs.pm/mix/Mix.Tasks.Release.html#module-environment-variables).
+  * Solution: provide `-e RELEASE_NODE=elixir_horizion`.
+
+
+### Others
+
+* Evaluator.IOProxy module into the remote node, potentially due to Erlang/OTP version mismatch.
+  * We have to make sure the Livebook's OTP version is compatibe with connecting node's OTP version.
+* docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
+  * On ubuntu (WSL), remember to start Docker service by: `sudo service docker start`.
+* Livebook docker image could start without problem, but could not visit its address from windows 11.
+
+  From my experience, it is caused by I started the docker in WSL2 while the docker engine is using is Docker desktop in windows 11.
+
+  * uninstall docker desktop from windows 11
+  * [install docker in Ubuntu20.04](https://docs.docker.com/engine/install/ubuntu/)
+  * Start livebook docker as before, you should click and visit Livebook from that address now.
 
 ## Learn more
 
