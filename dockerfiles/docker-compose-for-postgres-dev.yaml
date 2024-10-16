@@ -1,0 +1,31 @@
+# sudo docker compose -f dockerfiles/docker-compose-for-postgres-dev.yaml up
+services:
+# !!!DB setting should match the parameters defined in config/dev.exs:
+# database: "learn_phoenix_dev"
+  learn_phoenix_postgres:
+    image: postgres:16
+    restart: always
+    container_name: learn_phoenix_postgres
+    environment:
+      - POSTGRES_DB=learn_phoenix_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+# visit http://localhost:8080/?pgsql=db to interact postgres directly
+# Notice:  
+# !!!Select system as PostgreSQL!
+# the server name should be `learn_phoenix_postgres` which matches the DB service name.
+# the database should be "learn_phoenix_dev" which is defined by `POSTGRES_DB=learn_phoenix_dev`
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - learn_phoenix_postgres
+
+volumes:
+  postgres_data:
