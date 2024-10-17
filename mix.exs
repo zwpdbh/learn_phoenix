@@ -9,7 +9,9 @@ defmodule LearnPhoenix.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      # Add this option to show warnings as errors
+      elixirc_options: [warnings_as_errors: true]
     ]
   end
 

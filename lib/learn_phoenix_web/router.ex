@@ -1,4 +1,5 @@
 defmodule LearnPhoenixWeb.Router do
+  alias LearnPhoenixWeb.TaskController
   use LearnPhoenixWeb, :router
 
   pipeline :browser do
@@ -21,9 +22,12 @@ defmodule LearnPhoenixWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", LearnPhoenixWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", LearnPhoenixWeb do
+    pipe_through :api
+
+    # 4) Make sure you define the appropriate routes in lib/my_app_web/router.ex:
+    resources "/tasks", TaskController, only: [:create, :show, :index, :delete]
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:learn_phoenix, :dev_routes) do

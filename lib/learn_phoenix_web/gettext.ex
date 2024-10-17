@@ -20,5 +20,19 @@ defmodule LearnPhoenixWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :learn_phoenix
+
+  # use Gettext, otp_app: :learn_phoenix
+  # defining a Gettext backend by calling
+
+  #     use Gettext, otp_app: ...
+
+  # is deprecated. To define a backend, call:
+
+  #     use Gettext.Backend, otp_app: :my_app
+
+  # Then, instead of importing your backend, call this in your module:
+
+  #     use Gettext, backend: MyApp.Gettext
+
+  use Gettext.Backend, otp_app: :learn_phoenix
 end
