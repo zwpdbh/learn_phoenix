@@ -28,7 +28,7 @@ defmodule LearnPhoenixWeb.Router do
     pipe_through :api
 
     # 4) Make sure you define the appropriate routes in lib/my_app_web/router.ex:
-    resources "/tasks", TaskController, only: [:create, :show, :index, :delete]
+    resources "/tasks", TaskController, only: [:create, :show, :index, :update, :delete]
     resources "/articles", ArticleController, except: [:new, :edit]
   end
 

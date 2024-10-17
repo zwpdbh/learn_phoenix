@@ -16,8 +16,13 @@ defmodule LearnPhoenix.TaskContext do
     Repo.all(Task)
   end
 
-  def delete_task(id) do
-    task = get_task!(id)
+  def delete_task(%Task{} = task) do
     Repo.delete(task)
+  end
+
+  def update_task(%Task{} = task, attrs) do
+    task
+    |> Task.changeset(attrs)
+    |> Repo.update()
   end
 end
