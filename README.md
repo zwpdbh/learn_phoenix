@@ -67,26 +67,9 @@ sudo docker run \
 -e RELEASE_NODE=livebook_hello \
 -u $(id -u):$(id -g) \
 -v $(pwd):/data \
-ghcr.io/livebook-dev/livebook:0.14.4
-```
-
-```sh
-docker run \
--p 8007:8007 \
--p 8008:8008 \
--P \
--e LIVEBOOK_DISTRIBUTION=name \
--e LIVEBOOK_COOKIE=some_token \
--e LIVEBOOK_NODE=livebook@127.0.0.1 \
--e LIVEBOOK_PORT=8007 \
--e LIVEBOOK_IFRAME_PORT=8008 \
--u $(id -u):$(id -g) \
--v $(pwd):/data \
 ghcr.io/livebook-dev/livebook
-
 ```
 shows: 
-
 
 * `--network` specify the docker container we run use [Host network driver](https://docs.docker.com/network/drivers/host/).
 * Those LIVEBOOK options are from [Livebook README](https://github.com/livebook-dev/livebook/releases).

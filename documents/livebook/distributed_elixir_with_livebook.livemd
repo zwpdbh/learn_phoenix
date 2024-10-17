@@ -5,10 +5,6 @@
 Let's start by seeing where we're at and what's set.
 
 ```elixir
-Node.self()
-```
-
-```elixir
 # Shows the node name for this current livebook notebook
 IO.inspect(node())
 # Shows the randomly generated cookie for this node
@@ -31,13 +27,12 @@ As shown above, this notebook is now running in its own node with the environmen
 Now, let's connect to one of our other nodes. First we need to change the cookie of our current node to match those of the other nodes.
 
 ```elixir
-Node.set_cookie(:SOMECOOKIE)
+Node.set_cookie(:some_token)
 IO.inspect(Node.get_cookie())
 ```
 
 Now, let's connect to one of our other nodes. First we need to change the cookie of our current node to match those of the other nodes.
 
 ```elixir
-{:ok, host_name} = :inet.gethostname() |> IO.inspect(label: "Host computer name")
-Node.connect(:"hello@#{host_name}")
+Node.connect(:"hello@127.0.0.1")
 ```

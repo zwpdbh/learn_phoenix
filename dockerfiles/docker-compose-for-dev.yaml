@@ -1,23 +1,28 @@
 # docker compose -f dockerfiles/docker-compose-for-dev.yaml up --build
-version: '3.8'
 services:
   livebook:
     image: ghcr.io/livebook-dev/livebook
+    restart: "always"
+    user: "${UID:-1000}"
+    environment:
+      ERL_EPMD_PORT: 4369
+      ERL_INET_DIST_LISTEN_MIN: 9100
+      ERL_INET_DIST_LISTEN_MAX: 9200
+      LIVEBOOK_DISTRIBUTION: name
+      LIVEBOOK_COOKIE: some_token
+      LIVEBOOK_NODE: livebook@127.0.0.1
+      LIVEBOOK_PORT: 8007
+      LIVEBOOK_IFRAME_PORT: 8008
+      RELEASE_NODE: livebook
+      LIVEBOOK_HOME: /data 
+    # network_mode: "host"
     ports:
       - "8007:8007"
       - "8008:8008"
-    # network_mode: "host"
-    environment:
-      LIVEBOOK_DISTRIBUTION: name
-      LIVEBOOK_COOKIE: some_token
-      # LIVEBOOK_NODE: livebook@localhost
-      LIVEBOOK_PORT: 8007
-      LIVEBOOK_IFRAME_PORT: 8008
-      # RELEASE_NODE: livebook
-      LIVEBOOK_HOME: /data 
+      - "4369:4369"         # EPMD port
+      - "9100-9200:9100-9200" # Erlang node communication ports
     volumes:
-      - ../documents/livebook:/livebook
-      - ./data:/data
+      - ../documents/livebook:/data
 
 # !!!DB setting should match the parameters defined in config/dev.exs:
 # database: "learn_phoenix_dev"
@@ -35,8 +40,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     depends_on:
       - livebook
-    # networks:
-    #   - my_network
 
 # visit http://localhost:3001/?pgsql=db to interact postgres directly
 # Notice:  
@@ -50,13 +53,7 @@ services:
       - "3001:8080"
     depends_on:
       - learn_phoenix_postgres
-    # networks:
-    #   - my_network
 
 volumes:
+  livebook:
   postgres_data:
-  data:
-
-# networks:
-#   my_network:
-#     driver: bridge

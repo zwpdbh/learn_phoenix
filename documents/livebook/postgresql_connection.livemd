@@ -1,0 +1,30 @@
+# PostgreSQL connection
+
+```elixir
+Mix.install([
+  {:kino_db, "~> 0.2.10"},
+  {:postgrex, ">= 0.0.0"}
+])
+```
+
+## Section
+
+<!-- livebook:{"attrs":"eyJjYWNlcnRmaWxlIjoiIiwiZGF0YWJhc2UiOiJsZWFybl9waG9lbml4X2RldiIsImhvc3RuYW1lIjoibGVhcm5fcGhvZW5peF9wb3N0Z3JlcyIsInBhc3N3b3JkX3NlY3JldCI6IlBBU1NXRCIsInBvcnQiOjU0MzIsInR5cGUiOiJwb3N0Z3JlcyIsInVzZV9pcHY2IjpmYWxzZSwidXNlX3NzbCI6ZmFsc2UsInVzZXJuYW1lIjoicG9zdGdyZXMiLCJ2YXJpYWJsZSI6ImNvbm4ifQ","chunks":null,"kind":"Elixir.KinoDB.ConnectionCell","livebook_object":"smart_cell"} -->
+
+```elixir
+opts = [
+  hostname: "learn_phoenix_postgres",
+  port: 5432,
+  username: "postgres",
+  password: System.fetch_env!("LB_PASSWD"),
+  database: "learn_phoenix_dev"
+]
+
+{:ok, conn} = Kino.start_child({Postgrex, opts})
+```
+
+```elixir
+
+```
+
+<!-- livebook:{"offset":766,"stamp":{"token":"XCP.aGlpoxoXIFoPmtO_IH3FooYjtXd1bTG06p-vthKrfWifP8GJ4Mfm8YDYuaJ7VIU0fF3LCDtvuDWb8qaGR-KMg3TbGSoEnu2t2aBtNdlhiRun","version":2}} -->
