@@ -1,5 +1,6 @@
 defmodule LearnPhoenixWeb.Router do
-  alias LearnPhoenixWeb.TaskController
+  # Never do this: alias LearnPhoenixWeb.TaskController
+  # Otherwise, this will cause: "LearnPhoenixWeb.LearnPhoenixWeb.TaskController.init/1 is undefined"
   use LearnPhoenixWeb, :router
 
   pipeline :browser do
