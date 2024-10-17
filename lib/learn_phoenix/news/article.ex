@@ -1,8 +1,8 @@
-defmodule LearnPhoenix.Blog.Post do
+defmodule LearnPhoenix.News.Article do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "posts" do
+  schema "articles" do
     field :title, :string
     field :body, :string
 
@@ -10,10 +10,9 @@ defmodule LearnPhoenix.Blog.Post do
   end
 
   @doc false
-  def changeset(post, attrs) do
-    post
+  def changeset(article, attrs) do
+    article
     |> cast(attrs, [:title, :body])
     |> validate_required([:title, :body])
-    |> validate_length(:title, min: 2)
   end
 end

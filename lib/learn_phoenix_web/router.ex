@@ -29,6 +29,7 @@ defmodule LearnPhoenixWeb.Router do
 
     # 4) Make sure you define the appropriate routes in lib/my_app_web/router.ex:
     resources "/tasks", TaskController, only: [:create, :show, :index, :delete]
+    resources "/articles", ArticleController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
