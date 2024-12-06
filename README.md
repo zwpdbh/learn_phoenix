@@ -28,7 +28,7 @@ mix ecto.create
 - Start your Phoenix app with
 
 ```sh 
-iex -S mix phx.server
+iex --erl "-kernel shell_history enabled" -S mix phx.server 
 ```
 
 ## Setup REPL for development -- Start project with liveview as super repo

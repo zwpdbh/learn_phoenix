@@ -8,6 +8,16 @@
         v<%= Application.spec(:phoenix, :vsn) %>
       </p>
     </div>
+
+    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
+      <a href={~p"/posts"} class="hover:text-zinc-700">
+        Blog
+      </a>
+      <a href={~p"/dev/dashboard"} class="hover:text-zinc-700">
+        Dashboard
+      </a>
+    </div>
+
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
         @elixirphoenix
