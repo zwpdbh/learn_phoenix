@@ -28,14 +28,14 @@ mix ecto.create
 - Start your Phoenix app with
 
 ```sh 
-iex --erl "-kernel shell_history enabled" -S mix phx.server 
+iex --erl "-kernel shell_history enabled" --name hello@127.0.0.1 --cookie some_token -S mix phx.server 
 ```
 
 ## Setup REPL for development -- Start project with liveview as super repo
 
 ```sh
 # First, start the project with node name
-iex --name hello@127.0.0.1 --cookie some_token -S mix phx.server
+iex  --erl "-kernel shell_history enabled" --name hello@127.0.0.1 --cookie some_token -S mix phx.server
 Erlang/OTP 26 [erts-14.2.5] [source] [64-bit] [smp:24:24] [ds:24:24:10] [async-threads:1] [jit:ns]
 
 [info] Running HelloWeb.Endpoint with Bandit 1.5.2 at 127.0.0.1:4000 (http)
@@ -55,23 +55,24 @@ iex(hello@127.0.0.1)1> Node.self
   * There is also a `--sname` short name option.
 * `--cookie` is the shared token for all connecting nodes. Here is `some_token`.
 
+
 ```sh
-# Then, from another terminal 
-sudo docker run \
+# Then, from another terminal  
+docker run \
 --network=host \
+-e RELEASE_NODE=hello_livebook \
 -e LIVEBOOK_DISTRIBUTION=name \
 -e LIVEBOOK_COOKIE=some_token \
 -e LIVEBOOK_NODE=livebook@localhost \
 -e LIVEBOOK_PORT=8007 \
 -e LIVEBOOK_IFRAME_PORT=8008 \
--e RELEASE_NODE=livebook_hello \
 -u $(id -u):$(id -g) \
 -v $(pwd):/data \
 ghcr.io/livebook-dev/livebook
 ```
+
 shows: 
 
-* `--network` specify the docker container we run use [Host network driver](https://docs.docker.com/network/drivers/host/).
 * Those LIVEBOOK options are from [Livebook README](https://github.com/livebook-dev/livebook/releases).
 * We could specify to run certain version with gag `0.12.1` for Livebook image support OTP26: `ghcr.io/livebook-dev/livebook:0.12.1`.
 * If succeed, it should oupt something like:
@@ -92,6 +93,39 @@ shows:
 * If connected, it means we could create code block and execute any code as if we are using `iex`.
   * For example, if we visit `http://localhost:4000/route`, we shall see the existing routes available in phoenix.
   * We could also get the same infomation in livebook by executing the code: `Mix.Tasks.Phx.Routes.run ''` in evaluation cell.
+
+## How to use dialyxir in Phoenix
+
+Install it by edit `mix.exs`
+
+```elixir 
+{:dialyxir, "~> 1.4", only: [:dev], runtime: false}
+```
+
+Then run in terminal with: 
+
+```sh 
+mix do deps.get, deps.compile
+```
+
+Test it by define a function in some module
+
+```elixir 
+# Here our `@spec` says the function's return type is an string:
+@spec my_cool_func(integer(), integer()) :: String.t()
+def my_cool_func(an_integer, another_interger) do
+  new_integer = an_integer + 1 + another_interger
+
+  # But the function is actually returning a string!
+  Integer.to_string(new_integer)
+end
+```
+
+At last, we could run it by 
+
+```sh 
+mix dialyxir
+```
 
 ## Proxy hex packages
 
@@ -154,6 +188,22 @@ You shall see information like:
 ```
 
 ## Troubleshooting
+
+### Protocol 'inet_tcp': register/listen error: epmd_close
+
+Solution:
+
+```sh
+epmd -names
+```
+
+shows 
+```txt 
+epmd: up and running on port 4369 with data:
+name livebook at port 40095
+```
+
+It means there is a livebook already running. Find it and terminal will solve this problem (for instance terminate the docker pod instance).
 
 ### [error] `inotify-tools` is needed to run `file_system` for your system
 

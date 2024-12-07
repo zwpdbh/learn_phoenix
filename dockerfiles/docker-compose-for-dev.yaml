@@ -1,29 +1,5 @@
 # docker compose -f dockerfiles/docker-compose-for-dev.yaml up --build
 services:
-  livebook:
-    image: ghcr.io/livebook-dev/livebook
-    restart: "always"
-    user: "${UID:-1000}"
-    environment:
-      ERL_EPMD_PORT: 4369
-      ERL_INET_DIST_LISTEN_MIN: 9100
-      ERL_INET_DIST_LISTEN_MAX: 9200
-      LIVEBOOK_DISTRIBUTION: name
-      LIVEBOOK_COOKIE: some_token
-      LIVEBOOK_NODE: livebook@127.0.0.1
-      LIVEBOOK_PORT: 8007
-      LIVEBOOK_IFRAME_PORT: 8008
-      RELEASE_NODE: livebook
-      LIVEBOOK_HOME: /data 
-    # network_mode: "host"
-    ports:
-      - "8007:8007"
-      - "8008:8008"
-      - "4369:4369"         # EPMD port
-      - "9100-9200:9100-9200" # Erlang node communication ports
-    volumes:
-      - ../documents/livebook:/data
-
 # !!!DB setting should match the parameters defined in config/dev.exs:
 # database: "learn_phoenix_dev"
   learn_phoenix_postgres:
@@ -38,8 +14,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    depends_on:
-      - livebook
 
 # visit http://localhost:3001/?pgsql=db to interact postgres directly
 # Notice:  
@@ -55,5 +29,4 @@ services:
       - learn_phoenix_postgres
 
 volumes:
-  livebook:
   postgres_data:
