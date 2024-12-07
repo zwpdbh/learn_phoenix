@@ -26,5 +26,3 @@ opts = [
 ```elixir
 
 ```
-
-<!-- livebook:{"offset":766,"stamp":{"token":"XCP.aGlpoxoXIFoPmtO_IH3FooYjtXd1bTG06p-vthKrfWifP8GJ4Mfm8YDYuaJ7VIU0fF3LCDtvuDWb8qaGR-KMg3TbGSoEnu2t2aBtNdlhiRun","version":2}} -->
