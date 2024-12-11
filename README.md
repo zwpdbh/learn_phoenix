@@ -31,6 +31,82 @@ mix ecto.create
 iex --erl "-kernel shell_history enabled" --name hello@127.0.0.1 --cookie some_token -S mix phx.server 
 ```
 
+## Install Elixir 
+
+### Install ASDF 
+* Install some dependences 
+
+```sh 
+sudo apt-get update && sudo apt-get install \
+  build-essential \
+  autoconf \
+  libncurses5-dev \
+  libncursesw5-dev \
+  libwxgtk3.0-gtk3-dev \
+  libwxgtk-webview3.0-gtk3-dev \
+  xsltproc \
+  fop \
+  default-jdk \
+  libxml2-utils \
+  libssh-dev \
+  unixodbc-dev 
+```
+
+* Install [asdf](https://asdf-vm.com/guide/getting-started.html)
+
+### Install Elixir using asdf 
+
+* Add plugin for erlang and elixir
+
+```sh 
+asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+```
+
+* Check available elixir and erlang version and install them.
+
+```sh 
+asdf list erlang 
+asdf list elixir 
+...
+asdf install erlang 26.2.5
+asdf install elixir main-otp-26
+```
+
+* Set version and check info 
+
+```sh 
+asdf global erlang 26.2.5
+asdf global elixir main-otp-26
+
+# Or set the version in an existing project. 
+# This will create a .tool-versionsfile in your project 
+# which will instruct ASDF which versions to use.
+asdf local erlang 23.2.1
+asdf local elixir 1.11.2-otp-23
+
+erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().'
+elixir -v
+```
+
+* If Elixir or Erlang version is not compatible with Phoenix, we could uninstall erlang and elixir.
+
+For example: 
+
+```sh 
+asdf uninstall erlang 25.3
+```
+
+### Install hex and Phoenix
+
+When you install Elixir, `mix` is automatically included as part of the installation. Mix is a build tool that ships with Elixir, providing tasks for creating, compiling, testing Elixir projects, managing its dependencies, and more.
+
+```sh 
+mix local.hex
+mix archive.install hex phx_new
+```
+
+
 ## Setup REPL for development -- Start project with liveview as super repo
 
 ```sh
