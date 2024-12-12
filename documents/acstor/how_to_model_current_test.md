@@ -5,6 +5,11 @@ We need to track test result in web service to track:
 - The workload and acstor test coverage.
 - The workload and the bug created by user.
 
+## ACStor test feature attribute
+- id (uuid)
+- name 
+- storage_type: string
+
 ## sceanrio run instance attribute 
 - id (uuid)
 - start time, 
@@ -22,10 +27,7 @@ We need to track test result in web service to track:
 - workload_id (uuid), from Workload,
 - description: string
 
-## ACStor test feature attribute
-- id (uuid)
-- name 
-- storage_type: string
+
 
 ## relationship
 
