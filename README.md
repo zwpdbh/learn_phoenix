@@ -112,6 +112,23 @@ mix local.hex
 mix archive.install hex phx_new
 ```
 
+## How to use livebook 
+
+```sh
+docker run \
+-p 8007:8007 \
+-p 8008:8008 \
+-e RELEASE_NODE=hello_livebook \
+-e LIVEBOOK_DISTRIBUTION=name \
+-e LIVEBOOK_COOKIE=some_token \
+-e LIVEBOOK_NODE=livebook@127.0.0.1 \
+-e LIVEBOOK_PORT=8007 \
+-e LIVEBOOK_IFRAME_PORT=8008 \
+-u $(id -u):$(id -g) \
+-v $(pwd):/data \
+ghcr.io/livebook-dev/livebook
+```
+
 
 ## Setup REPL for development -- Start project with liveview as super repo
 
@@ -145,7 +162,7 @@ docker run \
 -e RELEASE_NODE=hello_livebook \
 -e LIVEBOOK_DISTRIBUTION=name \
 -e LIVEBOOK_COOKIE=some_token \
--e LIVEBOOK_NODE=livebook@localhost \
+-e LIVEBOOK_NODE=livebook@127.0.0.1 \
 -e LIVEBOOK_PORT=8007 \
 -e LIVEBOOK_IFRAME_PORT=8008 \
 -u $(id -u):$(id -g) \

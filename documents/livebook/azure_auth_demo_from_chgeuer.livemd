@@ -46,8 +46,6 @@ The `Mix.install()` function locally installs a collection of software libraries
 Running this command for the first time times a few minutes, as all the source code gets pulled
 from Github, and all packages (and their dependencies) get compiled.
 
-<!-- livebook:{"disable_formatting":true} -->
-
 ```elixir
 armSdk = fn (k,v) -> { k,
   github: "chgeuer/ex_microsoft_azure_management",
@@ -200,8 +198,6 @@ subscriptionID = client
    .SubscriptionID;
 ```
 
-<!-- livebook:{"livebook_object":"cell_input","name":"Subscription Name","type":"text","value":"chgeuer-work"} -->
-
 ```elixir
 alias Microsoft.Azure.Management.Subscription.Api.Subscriptions, as: SubscriptionMgmt
 
@@ -290,8 +286,6 @@ accounts
 :ok
 ```
 
-<!-- livebook:{"livebook_object":"cell_input","name":"Storage Account Name","type":"text","value":"bltcdn"} -->
-
 ```elixir
 storage_account_name = IO.gets("Storage Account Name") |> String.trim()
 
@@ -334,8 +328,6 @@ containers
 
 ### Create a new storage container
 
-<!-- livebook:{"livebook_object":"cell_input","name":"Container Name","type":"text","value":"demo111"} -->
-
 ```elixir
 container_name = IO.gets("Container Name") |> String.trim()
 
@@ -370,16 +362,14 @@ blobs
 
 ### Who's using it already?
 
-- Talk about prod customers of the SDKs
-- SDKs
-  - https://github.com/chgeuer/ex_microsoft_azure_utils
-  - https://github.com/chgeuer/ex_microsoft_azure_storage
-  - https://github.com/chgeuer/ex_microsoft_azure_management_generator
-  - https://github.com/chgeuer/ex_microsoft_azure_management
+* Talk about prod customers of the SDKs
+* SDKs
+  * https://github.com/chgeuer/ex_microsoft_azure_utils
+  * https://github.com/chgeuer/ex_microsoft_azure_storage
+  * https://github.com/chgeuer/ex_microsoft_azure_management_generator
+  * https://github.com/chgeuer/ex_microsoft_azure_management
 
-
--------------------------
-
+---
 
 ## Damn Meeting Minutes
 
