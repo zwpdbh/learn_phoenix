@@ -5,6 +5,11 @@ We need to track test result in web service to track:
 - The workload and acstor test coverage.
 - The workload and the bug created by user.
 
+## ACStor storage type 
+- id (uuid)
+- name 
+
+
 ## ACStor test feature attribute
 - id (uuid)
 - name 
