@@ -1,7 +1,7 @@
 defmodule LearnPhoenixWeb.TestFeatureControllerTest do
   use LearnPhoenixWeb.ConnCase
 
-  import LearnPhoenix.TestFeaturesFixtures
+  import LearnPhoenix.StorageFixtures
 
   @create_attrs %{name: "some name"}
   @update_attrs %{name: "some updated name"}

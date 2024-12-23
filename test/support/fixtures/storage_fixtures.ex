@@ -11,11 +11,21 @@ defmodule LearnPhoenix.StorageFixtures do
     {:ok, storage_type} =
       attrs
       |> Enum.into(%{
-        id: "7488a646-e31f-11e4-aace-600308960662",
-        name: "some name"
+        name: "Nvme"
       })
-      |> LearnPhoenix.Storage.create_storage_type()
+      |> LearnPhoenix.StorageContext.create_storage_type()
 
     storage_type
+  end
+
+  def test_feature_fixture(attrs \\ %{}) do
+    {:ok, test_feature} =
+      attrs
+      |> Enum.into(%{
+        name: "Cluster upgrade"
+      })
+      |> LearnPhoenix.StorageContext.create_test_feature()
+
+    test_feature
   end
 end
