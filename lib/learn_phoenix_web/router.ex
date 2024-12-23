@@ -21,6 +21,7 @@ defmodule LearnPhoenixWeb.Router do
 
     get "/", PageController, :home
     resources "/posts", PostController
+    resources "/storage_types", StorageTypeController
   end
 
   # Other scopes may use custom stacks.

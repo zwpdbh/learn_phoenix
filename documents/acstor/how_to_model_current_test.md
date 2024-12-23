@@ -10,10 +10,13 @@ We need to track test result in web service to track:
 - name 
 
 
-## ACStor test feature attribute
-- id (uuid)
+## ACStor test feature
+- id
 - name 
-- storage_type: string
+- supported features: multiple selection from ACStor storage type 
+
+So, for one ACStor storage type, it could have multiple ACStor test feature
+
 
 ## sceanrio run instance attribute 
 - id (uuid)
