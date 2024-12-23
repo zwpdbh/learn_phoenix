@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": true,
   // Enable inline suggestions for code completions and type hints
   "editor.inlineSuggest.enabled": true,
   "files.associations": {
@@ -40,4 +41,13 @@
     "error_handling",
     "underspecs"
   ],
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.exs?$",
+        "isAsync": false,
+        "cmd": "cd ${workspaceRoot} && mix format ${file}"
+      }
+    ]
+  }
 }

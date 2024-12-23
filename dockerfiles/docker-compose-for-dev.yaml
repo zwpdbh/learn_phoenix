@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - learn_phoenix_postgres_data:/var/lib/postgresql/data
 
 # visit http://localhost:3001/?pgsql=db to interact postgres directly
 # Notice:  
@@ -29,4 +29,4 @@ services:
       - learn_phoenix_postgres
 
 volumes:
-  postgres_data:
+  learn_phoenix_postgres_data:

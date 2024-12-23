@@ -66,24 +66,30 @@ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 * Check available elixir and erlang version and install them.
 
 ```sh 
+# check installed erlang and elixir
 asdf list erlang 
 asdf list elixir 
-...
-asdf install erlang 26.2.5
-asdf install elixir main-otp-26
+
+# check available version
+asdf list-all erlang | tail -n 10
+asdf list-all elixir | tail -n 10
+
+# install erlang and elixir 
+asdf install erlang 27.2
+asdf install elixir main-otp-27
 ```
 
 * Set version and check info 
 
 ```sh 
-asdf global erlang 26.2.5
-asdf global elixir main-otp-26
+asdf global erlang 27.2
+asdf global elixir main-otp-27
 
 # Or set the version in an existing project. 
 # This will create a .tool-versionsfile in your project 
 # which will instruct ASDF which versions to use.
-asdf local erlang 23.2.1
-asdf local elixir 1.11.2-otp-23
+asdf local erlang 27.2
+asdf local elixir main-otp-27
 
 erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().'
 elixir -v
@@ -104,6 +110,23 @@ When you install Elixir, `mix` is automatically included as part of the installa
 ```sh 
 mix local.hex
 mix archive.install hex phx_new
+```
+
+## How to use livebook 
+
+```sh
+docker run \
+-p 8007:8007 \
+-p 8008:8008 \
+-e RELEASE_NODE=hello_livebook \
+-e LIVEBOOK_DISTRIBUTION=name \
+-e LIVEBOOK_COOKIE=some_token \
+-e LIVEBOOK_NODE=livebook@127.0.0.1 \
+-e LIVEBOOK_PORT=8007 \
+-e LIVEBOOK_IFRAME_PORT=8008 \
+-u $(id -u):$(id -g) \
+-v $(pwd):/data \
+ghcr.io/livebook-dev/livebook
 ```
 
 
@@ -139,7 +162,7 @@ docker run \
 -e RELEASE_NODE=hello_livebook \
 -e LIVEBOOK_DISTRIBUTION=name \
 -e LIVEBOOK_COOKIE=some_token \
--e LIVEBOOK_NODE=livebook@localhost \
+-e LIVEBOOK_NODE=livebook@127.0.0.1 \
 -e LIVEBOOK_PORT=8007 \
 -e LIVEBOOK_IFRAME_PORT=8008 \
 -u $(id -u):$(id -g) \
