@@ -2,8 +2,6 @@ defmodule LearnPhoenix.Storage.StorageType do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "storage_types" do
     field :name, :string
 

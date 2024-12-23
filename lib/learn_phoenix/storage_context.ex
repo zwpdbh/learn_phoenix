@@ -1,4 +1,4 @@
-defmodule LearnPhoenix.Storage do
+defmodule LearnPhoenix.StorageContext do
   @moduledoc """
   The Storage context.
   """
@@ -7,6 +7,35 @@ defmodule LearnPhoenix.Storage do
   alias LearnPhoenix.Repo
 
   alias LearnPhoenix.Storage.StorageType
+  alias LearnPhoenix.Storage.TestFeature
+
+  def list_test_features do
+    Repo.all(TestFeature)
+  end
+
+  def get_test_feature!(id) do
+    Repo.get!(TestFeature, id)
+  end
+
+  def create_test_feature(attrs \\ %{}) do
+    %TestFeature{}
+    |> TestFeature.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_test_feature(%TestFeature{} = test_feature, attrs) do
+    test_feature
+    |> TestFeature.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_test_feature(%TestFeature{} = test_feature) do
+    Repo.delete(test_feature)
+  end
+
+  def change_test_feature(%TestFeature{} = test_feature, attrs \\ %{}) do
+    TestFeature.changeset(test_feature, attrs)
+  end
 
   @doc """
   Returns the list of storage_types.

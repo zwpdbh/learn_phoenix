@@ -2,8 +2,7 @@ defmodule LearnPhoenix.Repo.Migrations.CreateStorageTypes do
   use Ecto.Migration
 
   def change do
-    create table(:storage_types, primary_key: false) do
-      add :id, :uuid, primary_key: true
+    create table(:storage_types) do
       add :name, :string, null: false
 
       timestamps()
