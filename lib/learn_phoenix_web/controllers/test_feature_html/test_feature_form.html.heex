@@ -5,9 +5,13 @@
   <.input field={f[:name]} type="text" label="Name" />
   <.input
     field={f[:storage_type_ids]}
-    type="select"
+    type="checkbox"
     multiple={true}
-    options={@storage_types}
+    options={
+      Enum.map(@storage_types, fn storage_type ->
+        {storage_type.name, storage_type.id}
+      end)
+    }
     label="Storage Types"
   />
 
@@ -15,3 +19,5 @@
     <.button>Save Test feature</.button>
   </:actions>
 </.simple_form>
+
+<%= inspect(@storage_types) %>

@@ -16,7 +16,9 @@ defmodule LearnPhoenixWeb.TestFeatureController do
 
   def new(conn, _params) do
     changeset = StorageContext.change_test_feature(%TestFeature{})
-    storage_types = StorageContext.list_storage_types() |> Enum.map(&{&1.name, &1.id})
+    storage_types = StorageContext.list_storage_types()
+
+    IO.puts("->> Rendering new.html with storage_types: #{inspect(storage_types)}")
 
     render(conn, :new,
       changeset: changeset,
@@ -43,8 +45,14 @@ defmodule LearnPhoenixWeb.TestFeatureController do
 
   def edit(conn, %{"id" => id}) do
     test_feature = StorageContext.get_test_feature!(id)
+    storage_types = StorageContext.list_storage_types()
     changeset = StorageContext.change_test_feature(test_feature)
-    render(conn, :edit, test_feature: test_feature, changeset: changeset)
+
+    render(conn, :edit,
+      test_feature: test_feature,
+      changeset: changeset,
+      storage_types: storage_types
+    )
   end
 
   def update(conn, %{"id" => id, "test_feature" => test_feature_params}) do

@@ -3,6 +3,10 @@
   <:subtitle>Use this form to manage test_feature records in your database.</:subtitle>
 </.header>
 
-<.test_feature_form changeset={@changeset} action={~p"/test_features"} />
+<.test_feature_form
+  changeset={@changeset}
+  action={~p"/test_features"}
+  storage_types={@storage_types}
+/>
 
 <.back navigate={~p"/test_features"}>Back to test_features</.back>

@@ -8,6 +8,6 @@ defmodule LearnPhoenixWeb.TestFeatureHTML do
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
-
+  attr :storage_types, :list, required: true
   def test_feature_form(assigns)
 end
