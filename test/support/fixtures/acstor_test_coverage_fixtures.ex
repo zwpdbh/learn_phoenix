@@ -11,7 +11,7 @@ defmodule LearnPhoenix.AcstorTestCoverageFixtures do
     {:ok, storage_type} =
       attrs
       |> Enum.into(%{
-        name: "some name"
+        name: "Nvme"
       })
       |> LearnPhoenix.AcstorTestCoverage.create_storage_type()
 
