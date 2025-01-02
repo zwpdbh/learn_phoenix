@@ -3,9 +3,9 @@ defmodule LearnPhoenix.Repo.Migrations.CreateStorageTypes do
 
   def change do
     create table(:storage_types) do
-      add :name, :string, null: false
+      add :name, :string
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
     create unique_index(:storage_types, [:name])
