@@ -101,4 +101,100 @@ defmodule LearnPhoenix.AcstorTestCoverage do
   def change_storage_type(%StorageType{} = storage_type, attrs \\ %{}) do
     StorageType.changeset(storage_type, attrs)
   end
+
+  alias LearnPhoenix.AcstorTestCoverage.AcstorFeature
+
+  @doc """
+  Returns the list of acstor_features.
+
+  ## Examples
+
+      iex> list_acstor_features()
+      [%AcstorFeature{}, ...]
+
+  """
+  def list_acstor_features do
+    Repo.all(AcstorFeature)
+  end
+
+  @doc """
+  Gets a single acstor_feature.
+
+  Raises `Ecto.NoResultsError` if the Acstor feature does not exist.
+
+  ## Examples
+
+      iex> get_acstor_feature!(123)
+      %AcstorFeature{}
+
+      iex> get_acstor_feature!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_acstor_feature!(id), do: Repo.get!(AcstorFeature, id)
+
+  @doc """
+  Creates a acstor_feature.
+
+  ## Examples
+
+      iex> create_acstor_feature(%{field: value})
+      {:ok, %AcstorFeature{}}
+
+      iex> create_acstor_feature(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_acstor_feature(attrs \\ %{}) do
+    %AcstorFeature{}
+    |> AcstorFeature.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a acstor_feature.
+
+  ## Examples
+
+      iex> update_acstor_feature(acstor_feature, %{field: new_value})
+      {:ok, %AcstorFeature{}}
+
+      iex> update_acstor_feature(acstor_feature, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_acstor_feature(%AcstorFeature{} = acstor_feature, attrs) do
+    acstor_feature
+    |> AcstorFeature.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a acstor_feature.
+
+  ## Examples
+
+      iex> delete_acstor_feature(acstor_feature)
+      {:ok, %AcstorFeature{}}
+
+      iex> delete_acstor_feature(acstor_feature)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_acstor_feature(%AcstorFeature{} = acstor_feature) do
+    Repo.delete(acstor_feature)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking acstor_feature changes.
+
+  ## Examples
+
+      iex> change_acstor_feature(acstor_feature)
+      %Ecto.Changeset{data: %AcstorFeature{}}
+
+  """
+  def change_acstor_feature(%AcstorFeature{} = acstor_feature, attrs \\ %{}) do
+    AcstorFeature.changeset(acstor_feature, attrs)
+  end
 end

@@ -17,4 +17,19 @@ defmodule LearnPhoenix.AcstorTestCoverageFixtures do
 
     storage_type
   end
+
+  @doc """
+  Generate a acstor_feature.
+  """
+  def acstor_feature_fixture(attrs \\ %{}) do
+    {:ok, acstor_feature} =
+      attrs
+      |> Enum.into(%{
+        description: "some description",
+        name: "some name"
+      })
+      |> LearnPhoenix.AcstorTestCoverage.create_acstor_feature()
+
+    acstor_feature
+  end
 end
