@@ -2,8 +2,13 @@ defmodule LearnPhoenix.AcstorTestCoverage.StorageType do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias LearnPhoenix.AcstorTestCoverage.AcstorFeature
+  alias LearnPhoenix.AcstorTestCoverage.AcstorFeatureStorageType
+
   schema "storage_types" do
     field :name, :string
+
+    many_to_many :acstor_features, AcstorFeature, join_through: AcstorFeatureStorageType
 
     timestamps(type: :utc_datetime)
   end
