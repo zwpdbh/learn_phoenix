@@ -17,7 +17,8 @@
   "emmet.showAbbreviationSuggestions": true,
   "emmet.includeLanguages": {
     "phoenix-heex": "html",
-    "html-eex": "html"
+    "html-eex": "html",
+    "elixir": "html"
   },
   "editor.quickSuggestions": {
     "comments": "inline",
