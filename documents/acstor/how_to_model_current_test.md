@@ -5,10 +5,18 @@ We need to track test result in web service to track:
 - The workload and acstor test coverage.
 - The workload and the bug created by user.
 
-## ACStor test feature attribute
+## ACStor storage type 
 - id (uuid)
 - name 
-- storage_type: string
+
+
+## ACStor test feature
+- id
+- name 
+- supported features: multiple selection from ACStor storage type 
+
+So, for one ACStor storage type, it could have multiple ACStor test feature
+
 
 ## sceanrio run instance attribute 
 - id (uuid)

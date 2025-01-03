@@ -1,4 +1,4 @@
-# docker compose -f dockerfiles/docker-compose-for-dev.yaml up --build
+# docker compose -f dockerfiles/docker-compose-for-dev.yaml up
 services:
 # !!!DB setting should match the parameters defined in config/dev.exs:
 # database: "learn_phoenix_dev"

@@ -288,6 +288,14 @@ You shall see information like:
 
 ## Troubleshooting
 
+### `mix test` show error "ERROR 42P07 (duplicate_table) relation "storage_types" already exists"
+
+Solution:
+
+```sh 
+MIX_ENV=test mix ecto.reset
+```
+
 ### Protocol 'inet_tcp': register/listen error: epmd_close
 
 Solution:
